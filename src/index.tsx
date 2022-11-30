@@ -6,13 +6,20 @@ import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 import "./styles/globals.css";
 
 // This is the chainId your dApp will work on.
-const activeChainId = ChainId.Mainnet;
+const activeChainId = ChainId.Goerli;
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
 root.render(
   <React.StrictMode>
-    <ThirdwebProvider desiredChainId={activeChainId}>
+    <ThirdwebProvider
+      desiredChainId={activeChainId}
+      authConfig={{
+        // Set this to your domain to prevent signature malleability attacks.
+        domain: "example.com",
+        authUrl: "https://mocaverse-api-test-m29b.zeet-nftlabs.zeet.app/auth",
+      }}
+    >
       <App />
     </ThirdwebProvider>
   </React.StrictMode>
